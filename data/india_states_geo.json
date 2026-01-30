@@ -1,0 +1,45 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {"state": "Karnataka"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[74.0, 11.5], [78.5, 11.5], [78.5, 18.5], [74.0, 18.5], [74.0, 11.5]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"state": "Maharashtra"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[72.5, 15.0], [78.0, 15.0], [78.0, 22.5], [72.5, 22.5], [72.5, 15.0]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"state": "Gujarat"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[68.0, 20.0], [73.0, 20.0], [73.0, 24.0], [68.0, 24.0], [68.0, 20.0]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"state": "Tamil Nadu"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[77.0, 8.0], [80.5, 8.0], [80.5, 13.5], [77.0, 13.5], [77.0, 8.0]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"state": "Uttar Pradesh"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[79.0, 24.0], [84.0, 24.0], [84.0, 28.5], [79.0, 28.5], [79.0, 24.0]]]
+      }
+    }
+  ]
+}
