@@ -24,18 +24,18 @@ def load_historical_prices():
 	if not path.exists():
 		return pd.DataFrame(columns=["date", "price_per_gram"])
 	df = pd.read_csv(path)
-	# Support two formats: (date, price_per_gram) or (Year, Month, Silver_Price_INR_per_kg)
+	
 	if set(["date", "price_per_gram"]).issubset(df.columns):
 		df["date"] = pd.to_datetime(df["date"])
 		return df.sort_values("date")
 	if set(["Year", "Month", "Silver_Price_INR_per_kg"]).issubset(df.columns):
-		# construct a first-of-month date
+		
 		df["month_num"] = df["Month"].apply(lambda m: pd.to_datetime(m, format="%b").month if isinstance(m, str) else int(m))
 		df["date"] = pd.to_datetime(df["Year"].astype(str) + "-" + df["month_num"].astype(str) + "-01")
 		# convert per-kg to per-gram
 		df["price_per_gram"] = df["Silver_Price_INR_per_kg"] / 1000.0
 		return df[["date", "price_per_gram"]].sort_values("date")
-	# fallback: try parse first two columns as date and price
+	
 	try:
 		df.columns = [c.strip() for c in df.columns]
 		df.iloc[:, 0] = pd.to_datetime(df.iloc[:, 0], errors="coerce")
@@ -50,7 +50,7 @@ def load_state_purchases():
 	if not path.exists():
 		return pd.DataFrame(columns=["state", "total_kg"])
 	df = pd.read_csv(path)
-	# normalize column names
+	
 	cols = {c.lower(): c for c in df.columns}
 	# common patterns
 	if "state" in cols or "state" in [c.lower() for c in df.columns]:
@@ -85,13 +85,7 @@ def load_karnataka_monthly():
 	return pd.read_csv(path, parse_dates=["month"]).sort_values("month")
 
 def load_january_sales():
-	"""Load January sales per state.
-	Priority:
-	1. data/state_monthly_sales.csv with a 'Jan' column
-	2. data/state_wise_silver_purchased_kg.csv if it has a 'Jan' column
-	3. estimate Jan as annual_total/12 from state_wise_silver_purchased_kg.csv
-	"""
-	# option 1
+
 	path1 = DATA_DIR / "state_monthly_sales.csv"
 	path2 = DATA_DIR / "state_wise_silver_purchased_kg.csv"
 	if path1.exists():
@@ -217,7 +211,7 @@ else:
 	st.dataframe(merged[["state", "total_kg"]].sort_values("total_kg", ascending=False))
 
 st.markdown("---")
-st.markdown("Data files used: `data/historical_prices.csv`, `data/state_purchases.csv`, `data/karnataka_monthly.csv`, `data/india_states_geo.json`")
+st.markdown("Data files used: `data/historical_prices.csv`, `data/state_purchases.csv`, `data/india_states_geo.json`")
 
 st.title("Sales Data Analysis")
-st.write("Upload your sales data csv file to visulaize sales trends over time. ")
+st.write("Upload your sales data csv file to visualize sales trends over time. ")
